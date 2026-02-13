@@ -149,7 +149,7 @@ export default function Details() {
     }, [lat, lon]);
 
     function weatherLabel(code: number) {
-        if (code === 0) return { emoji: "☀️", label: "Ciel clair" };
+        if (code === 0) return { emoji: "☀️" };
         if (code === 1 || code === 2 || code === 3) return { emoji: "🌤️" };
         if (code === 45 || code === 48) return { emoji: "🌫️" };
         if (code === 51 || code === 53 || code === 55) return { emoji: "🌦️" };
@@ -163,7 +163,6 @@ export default function Details() {
 
     return (
         <SafeAreaView style={styles.container}>
-            {/* header : nom + barre de recherche à côté */}
             <View style={styles.headerRow}>
                 <Text style={styles.title}>{name}</Text>
                 <View style={styles.searchWrapper}>
@@ -235,7 +234,9 @@ export default function Details() {
                                         <Text style={styles.colDate}>{dateLabel}</Text>
                                         <Text style={styles.colTemp}>{displayTemp}</Text>
                                         <Text style={styles.colWeather}>
-                                            {w.emoji} {w.label}
+                                            <View style={styles.weatherBadge}>
+                                                <Text style={styles.weatherEmoji}>{w.emoji}</Text>
+                                            </View>
                                         </Text>
                                     </View>
                                 );
@@ -331,5 +332,17 @@ const styles = StyleSheet.create({
     colWeather: {
         flex: 2,
         textAlign: "right",
+    },
+    weatherBadge: {
+        backgroundColor: "#FFF5F4",
+        borderRadius: 12,
+        paddingHorizontal: 8,
+        paddingVertical: 4,
+        minWidth: 36,
+        alignItems: "center",
+        justifyContent: "center",
+    },
+    weatherEmoji: {
+        fontSize: 18,
     },
 });
